@@ -122,7 +122,7 @@ st.markdown("""
         font-family: sans-serif;
     '>
         <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-            <img src='data:image/png;base64,{logo}' style='width: 50px; height: 40px; margin-right: 10px;' />
+            <img src='data:image/png;base64,{logo}' style='width: 70px; height: 50px; margin-right: 10px;' />
             <h3 style='color: #004890; margin: 0;'>Lente da ordinare</h3>
         </div>
         <p style='font-size: 20px; margin: 0.3rem 0;'><strong>Diametro Totale (TD):</strong> {td:.2f} mm</p>
