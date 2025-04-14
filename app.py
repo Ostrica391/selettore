@@ -122,7 +122,7 @@ st.markdown("""
         font-family: sans-serif;
     '>
         <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-            <span style="font-size: 30px; margin-right: 10px;">👁</span>
+            <span style="font-size: 40px; margin-right: 10px;">👁</span>
             <h3 style='color: #004890; margin: 0;'>Lente da ordinare</h3>
         </div>
         <p style='font-size: 20px; margin: 0.3rem 0;'><strong>Diametro Totale (TD):</strong> {td:.2f} mm</p>
