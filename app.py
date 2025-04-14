@@ -1,5 +1,3 @@
-# UNIFICAZIONE DUE CALCOLATORI IN UNA SOLA APP STREAMLIT
-
 import streamlit as st
 from PIL import Image
 import base64
@@ -23,58 +21,95 @@ st.markdown("""
         max-width: 90% !important;
         padding: 2rem 3rem;
     }
-    .top-menu {
-        position: absolute;
-        top: 60px;
-        left: 0px;
-        z-index: 1;
+    .cassette {
+        background-color: #f8f9fa;
+        border-radius: 20px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin: 30px auto;
+        border: 2px solid #ccc;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
     }
-    .top-menu button {
-        display: block;
-        background-color: #004890;
-        color: white;
-        padding: 8px 16px;
-        margin-bottom: 8px;
-        border: none;
-        border-radius: 6px;
-        font-size: 14px;
+    .cassette-row {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+    }
+    .lens {
         text-align: center;
-        width: 160px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        cursor: pointer;
+        margin: 0 5px;
     }
-    .top-menu button:hover {
-        background-color: #0060b0;
+    .selected {
+        border: 5px solid red;
+        padding: 5px;
+        border-radius: 12px;
+    }
+    .arrow {
+        font-size: 30px;
+        margin-bottom: 5px;
+        color: red;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# --- MENU ---
-st.markdown("""
-    <div class="top-menu">
-        <form action="" method="post">
-            <button name="page" value="cs">Calcolatore CS</button>
-            <button name="page" value="scl">Calcolatore SCL-ADV</button>
-            <button name="page" value="wip">Work in progress</button>
-            <button name="page" value="wip2">Work in progress</button>
-        </form>
-    </div>
-""", unsafe_allow_html=True)
-
-# --- LOGO ---
+# --- LOGO CENTRALE ---
 st.markdown("""
     <div style='text-align: center;'>
         <img src='data:image/png;base64,""" + base64.b64encode(open("TSLAC.png", "rb").read()).decode() + """' style='width: 400px; margin-bottom: 10px;'>
     </div>
 """, unsafe_allow_html=True)
 
-# --- SCELTA PAGINA ---
+# --- MENU PULSANTI ---
 if 'page' not in st.session_state:
-    st.session_state.page = 'cs'
+    st.session_state.page = "cs"
 
-# Hack per cambiare pagina via pulsanti
-page = st.query_params.get("page", st.session_state.page)
-st.session_state.page = page
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    if st.button("Calcolatore CS"):
+        st.session_state.page = "cs"
+with col2:
+    if st.button("Calcolatore SCL-ADV"):
+        st.session_state.page = "scl"
+with col3:
+    if st.button("Work in progress"):
+        st.session_state.page = "wip"
+with col4:
+    if st.button("Work in progress 2"):
+        st.session_state.page = "wip2"
+
+# --- FUNZIONI DI VISUALIZZAZIONE ---
+def show_cassette(paths, labels, selected):
+    st.markdown("<div class='cassette'>", unsafe_allow_html=True)
+    html = "<div style='display: flex; justify-content: center; gap: 25px;'>"
+    for i, path in enumerate(paths):
+        img = Image.open(path)
+        encoded = pil_to_base64(img)
+        arrow = "<div class='arrow'>⬇️</div>" if i in selected else ""
+        highlight = "selected" if i in selected else ""
+        html += f"<div class='lens'>{arrow}<img src='data:image/png;base64,{encoded}' style='width: 190px; border-radius: 10px;' class='{highlight}'><div>{labels[i]}{' (Lente ideale)' if i in selected else ''}</div></div>"
+    html += "</div>"
+    st.markdown(html + "</div>", unsafe_allow_html=True)
+
+def show_double_cassette(paths1, labels1, paths2, labels2, selected):
+    st.markdown("<div class='cassette'>", unsafe_allow_html=True)
+    for paths, labels, offset in [(paths1, labels1, 0), (paths2, labels2, 7)]:
+        html = "<div class='cassette-row'>"
+        for i, path in enumerate(paths):
+            img = Image.open(path)
+            encoded = pil_to_base64(img)
+            idx = i + offset
+            arrow = "<div class='arrow'>⬇️</div>" if idx in selected else ""
+            highlight = "selected" if idx in selected else ""
+            html += f"<div class='lens'>{arrow}<img src='data:image/png;base64,{encoded}' style='width: 190px; border-radius: 10px;' class='{highlight}'><div>{labels[i]}{' (Lente ideale)' if idx in selected else ''}</div></div>"
+        html += "</div>"
+        st.markdown(html, unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # --- CALCOLATORE CS ---
 def mostra_calcolatore_cs():
@@ -103,10 +138,8 @@ def mostra_calcolatore_cs():
 
     paths = [f"cs{i+1}.png" for i in range(7)]
     labels = ["SAG 3000µm", "SAG 3150µm", "SAG 3250µm", "SAG 3350µm", "SAG 3450µm", "SAG 3600µm", "SAG 3850µm"]
-
     show_cassette(paths, labels, [indice] if indice is not None else [])
 
-    # immagini finali
     for img_name in ["totalsag.png", "totalsagb.png", "totalsagc.png"]:
         with open(img_name, "rb") as f:
             encoded = base64.b64encode(f.read()).decode()
@@ -152,38 +185,10 @@ def mostra_calcolatore_scl():
                 </div>
             """, unsafe_allow_html=True)
 
-# --- FUNZIONI DI VISUALIZZAZIONE ---
-def show_cassette(paths, labels, selected):
-    st.markdown("<div class='cassette'>", unsafe_allow_html=True)
-    html = "<div style='display: flex; justify-content: center; gap: 25px;'>"
-    for i, path in enumerate(paths):
-        img = Image.open(path)
-        encoded = pil_to_base64(img)
-        arrow = "<div class='arrow'>⬇️</div>" if i in selected else ""
-        highlight = "selected" if i in selected else ""
-        html += f"<div class='lens'>{arrow}<img src='data:image/png;base64,{encoded}' style='width: 190px; border-radius: 10px;' class='{highlight}'><div>{labels[i]}{' (Lente ideale)' if i in selected else ''}</div></div>"
-    html += "</div>"
-    st.markdown(html + "</div>", unsafe_allow_html=True)
-
-def show_double_cassette(paths1, labels1, paths2, labels2, selected):
-    st.markdown("<div class='cassette'>", unsafe_allow_html=True)
-    for paths, labels, offset in [(paths1, labels1, 0), (paths2, labels2, 7)]:
-        html = "<div class='cassette-row'>"
-        for i, path in enumerate(paths):
-            img = Image.open(path)
-            encoded = pil_to_base64(img)
-            idx = i + offset
-            arrow = "<div class='arrow'>⬇️</div>" if idx in selected else ""
-            highlight = "selected" if idx in selected else ""
-            html += f"<div class='lens'>{arrow}<img src='data:image/png;base64,{encoded}' style='width: 190px; border-radius: 10px;' class='{highlight}'><div>{labels[i]}{' (Lente ideale)' if idx in selected else ''}</div></div>"
-        html += "</div>"
-        st.markdown(html, unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
-
-# --- AVVIO ---
-if page == "cs":
+# --- AVVIO PAGINA ---
+if st.session_state.page == "cs":
     mostra_calcolatore_cs()
-elif page == "scl":
+elif st.session_state.page == "scl":
     mostra_calcolatore_scl()
 else:
     st.title("Work in progress 🛠")
