@@ -64,12 +64,36 @@ st.title("Morbide Sagittali - TS LAC")
 # Input
 val1 = st.number_input("Inserisci SAG 5.00mm 0°", value=1700, step=10)
 val2 = st.number_input("Inserisci SAG 5.00mm 180°", value=1700, step=10)
+val3 = st.number_input("Inserisci TD lente°", value=1700, step=10)
 
 # Lista delle voci
-voci = ["Voce 1", "Voce 2", "Voce 3", "Voce 4", "Voce 5", "Voce 6", "Voce 7"]
+voci = ["SiHy7", "SiHy6", "B5X", "B4X", "B3X", "M7", "M4", "M3"]
+
+# Valori extra da aggiungere per ogni voce
+extra_valori = {
+    "SiHy7": 350,
+    "SiHy6": 300,
+    "B5X": 250,
+    "B4X": 200,
+    "B3X": 150,
+    "M7": 100,
+    "M4": 50,
+    "M3": 0
+}
 
 # Menu a tendina
-scelta = st.selectbox("Seleziona una voce:", voci)
+scelta = st.selectbox("Seleziona il materiale:", voci)
 
-# Mostra la voce selezionata
-st.write(f"Hai selezionato: {scelta}")
+# Calcolo base
+risultato_base = (val1 + val2) / 2 + ((val3 - 10) * 400)
+
+# Ottieni valore extra
+valore_extra = extra_valori.get(scelta, 0)
+
+# Risultato finale
+risultato_finale = risultato_base + valore_extra
+
+# Output
+st.write(f"Hai selezionato: **{scelta}**")
+st.write(f"Valore extra applicato: **+{valore_extra}**")
+st.subheader(f"Risultato finale: {risultato_finale:.2f}")
