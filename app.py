@@ -91,7 +91,7 @@ risultato_base = (val1 + val2) / 2 + ((val3 - 10) * 400)
 valore_extra = extra_valori.get(scelta, 0)
 
 # Risultato finale
-risultato_finale = risultato_base + valore_extra
+risultato = risultato_base + valore_extra
 
 # Output
 st.subheader(f"Sag da ordinare: {risultato_finale:.2f}")
