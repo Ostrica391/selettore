@@ -94,7 +94,7 @@ valore_extra = extra_valori.get(scelta, 0)
 risultato = risultato_base + valore_extra
 
 # Output
-st.subheader(f"Sag da ordinare: {risultato_finale:.2f}")
+st.subheader(f"Sag da ordinare: {risultato:.2f}")
 
 # Calcolo del raggio base
 rb = ((val3 * 1000)**2 / (8000 * risultato)) + (risultato / 2000)
