@@ -64,7 +64,7 @@ st.title("Morbide Sagittali - TS LAC")
 # Input
 val1 = st.number_input("Inserisci SAG 5.00mm 0°", value=1700, step=10)
 val2 = st.number_input("Inserisci SAG 5.00mm 180°", value=1700, step=10)
-val3 = st.number_input("Inserisci TD lente°", value=14, step=0.05)
+val3 = st.number_input("Inserisci TD lente°", value=14, step=0.05, format="%.2f")
 
 # Lista delle voci
 voci = ["SiHy7", "SiHy6", "B5X", "B4X", "B3X", "M7", "M4", "M3"]
