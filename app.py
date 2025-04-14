@@ -99,4 +99,4 @@ st.subheader(f"Sag da ordinare: {risultato:.2f}")
 # Calcolo del raggio base
 rb = ((val3 * 1000)**2 / (8000 * risultato)) + (risultato / 2000)
 
-st.markdown(f"<h4 style='color:#004890;'>Raggio base da ordinare: <b>{rb:.2f}</b> µm</h4>", unsafe_allow_html=True)
+st.markdown(f"<h4 style='color:#004890;'>Raggio base da ordinare: <b>{rb:.2f}</b> mm</h4>", unsafe_allow_html=True)
