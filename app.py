@@ -105,3 +105,25 @@ rb = math.floor(rb * 20) / 20
 
 # Output
 st.markdown(f"<h4 style='color:#004890;'>Raggio base da ordinare: <b>{rb:.2f}</b> mm</h4>", unsafe_allow_html=True)
+
+# Pannello riassuntivo "Lente da ordinare"
+st.markdown("""
+    <div style='
+        background-color: #e6f0fa;
+        border-left: 8px solid #004890;
+        padding: 1.5rem 2rem;
+        border-radius: 12px;
+        margin-top: 30px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    '>
+        <h3 style='color: #004890; margin-bottom: 1rem;'>👁️‍🗨️ Lente da ordinare</h3>
+        <p style='font-size: 20px; margin: 0.3rem 0;'><strong>Diametro Totale (TD):</strong> {td:.2f} mm</p>
+        <p style='font-size: 20px; margin: 0.3rem 0;'><strong>Raggio Base (Rb):</strong> {rb:.2f} mm</p>
+        <p style='font-size: 20px; margin: 0.3rem 0;'><strong>Materiale:</strong> {mat}</p>
+    </div>
+""".format(td=val3, rb=rb, mat=scelta), unsafe_allow_html=True)
+
