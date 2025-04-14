@@ -94,6 +94,4 @@ valore_extra = extra_valori.get(scelta, 0)
 risultato_finale = risultato_base + valore_extra
 
 # Output
-st.write(f"Hai selezionato: **{scelta}**")
-st.write(f"Valore extra applicato: **+{valore_extra}**")
-st.subheader(f"Risultato finale: {risultato_finale:.2f}")
+st.subheader(f"Sag da ordinare: {risultato_finale:.2f}")
