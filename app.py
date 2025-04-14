@@ -106,7 +106,7 @@ rb = math.floor(rb * 20) / 20
 # Output
 st.markdown(f"<h4 style='color:#004890;'>Raggio base da ordinare: <b>{rb:.2f}</b> mm</h4>", unsafe_allow_html=True)
 
-# Pannello riassuntivo con logo piccolo accanto al titolo
+# Pannello riassuntivo con emoji 👁️‍🗨️ accanto al titolo
 st.markdown("""
     <div style='
         background-color: #e6f0fa;
@@ -122,7 +122,7 @@ st.markdown("""
         font-family: sans-serif;
     '>
         <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-            <img src='data:image/png;base64,{logo}' style='width: 110px; height: 90px; margin-right: 10px;' />
+            <span style="font-size: 30px; margin-right: 10px;">👁</span>
             <h3 style='color: #004890; margin: 0;'>Lente da ordinare</h3>
         </div>
         <p style='font-size: 20px; margin: 0.3rem 0;'><strong>Diametro Totale (TD):</strong> {td:.2f} mm</p>
@@ -130,9 +130,9 @@ st.markdown("""
         <p style='font-size: 20px; margin: 0.3rem 0;'><strong>Materiale:</strong> {mat}</p>
     </div>
 """.format(
-    logo=base64.b64encode(open("TSLAC.png", "rb").read()).decode(),
     td=val3,
     rb=rb,
     mat=scelta
 ), unsafe_allow_html=True)
+
 
