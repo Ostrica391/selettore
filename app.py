@@ -138,7 +138,7 @@ st.markdown("""
 # Logo centrato
 st.markdown("""
     <div style='text-align: center;'>
-        <img src='data:image/png;base64,""" + base64.b64encode(open("Lens Sag.png", "rb").read()).decode() + """' style='width: 800px; margin-top: 30px; margin-bottom: 10px;'>
+        <img src='data:image/png;base64,""" + base64.b64encode(open("Lens Sag.png", "rb").read()).decode() + """' style='width: 800px; margin-top: 0px; margin-bottom: 10px;'>
     </div>
 """, unsafe_allow_html=True)
 
