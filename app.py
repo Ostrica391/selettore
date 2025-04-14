@@ -104,5 +104,4 @@ import math
 rb = math.floor(rb * 20) / 20
 
 # Output
-st.subheader(f"Sag da ordinare: {risultato:.0f} µm")
 st.markdown(f"<h4 style='color:#004890;'>Raggio base da ordinare: <b>{rb:.2f}</b> mm</h4>", unsafe_allow_html=True)
