@@ -73,7 +73,7 @@ if 'page' not in st.session_state:
     st.session_state.page = 'cs'
 
 # Hack per cambiare pagina via pulsanti
-page = st.experimental_get_query_params().get("page", [st.session_state.page])[0]
+page = st.query_params.get("page", st.session_state.page)
 st.session_state.page = page
 
 # --- CALCOLATORE CS ---
