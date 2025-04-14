@@ -72,13 +72,13 @@ voci = ["SiHy7", "SiHy6", "B5X", "B4X", "B3X", "M7", "M4", "M3"]
 # Valori extra da aggiungere per ogni voce
 extra_valori = {
     "SiHy7": 350,
-    "SiHy6": 300,
-    "B5X": 250,
-    "B4X": 200,
-    "B3X": 150,
-    "M7": 100,
-    "M4": 50,
-    "M3": 0
+    "SiHy6": 350,
+    "B5X": 350,
+    "B4X": 350,
+    "B3X": 350,
+    "M7": 350,
+    "M4": 350,
+    "M3": 350
 }
 
 # Menu a tendina
