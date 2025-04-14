@@ -90,13 +90,19 @@ risultato_base = (val1 + val2) / 2 + ((val3 - 10) * 400)
 # Ottieni valore extra
 valore_extra = extra_valori.get(scelta, 0)
 
-# Risultato finale
+# Risultato finale (non ancora arrotondato)
 risultato = risultato_base + valore_extra
 
-# Output
-st.subheader(f"Sag da ordinare: {risultato:.2f}")
+# Arrotonda il risultato a multipli di 5
+risultato = round(risultato / 5) * 5
 
 # Calcolo del raggio base
 rb = ((val3 * 1000)**2 / (8000 * risultato)) + (risultato / 2000)
 
+# Arrotonda rb a multipli di 0.05 per difetto
+import math
+rb = math.floor(rb * 20) / 20
+
+# Output
+st.subheader(f"Sag da ordinare: {risultato:.0f} µm")
 st.markdown(f"<h4 style='color:#004890;'>Raggio base da ordinare: <b>{rb:.2f}</b> mm</h4>", unsafe_allow_html=True)
