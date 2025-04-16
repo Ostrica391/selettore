@@ -142,3 +142,9 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+    <div style='position: relative; bottom: 0; width: 100%; text-align: center; font-size: 10px; color: gray; margin-top: 50px;'>
+        TSLAC stc-030 rev. 01-25
+    </div>
+""", unsafe_allow_html=True)
+
